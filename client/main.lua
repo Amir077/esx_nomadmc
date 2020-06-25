@@ -113,7 +113,7 @@ function OpenArmoryMenu(station)
       },
       function(data, menu)
         local weapon = data.current.value
-        TriggerServerEvent('esx_thelostmcjob:giveWeapon', weapon,  1000)
+        TriggerServerEvent('esx_nomadmcjob:giveWeapon', weapon,  1000)
       end,
       function(data, menu)
 
@@ -165,7 +165,7 @@ function OpenVehicleSpawnerMenu(station, partNum)
             TaskWarpPedIntoVehicle(playerPed,  vehicle,  -1)
           end)
 
-          TriggerServerEvent('esx_society:removeVehicleFromGarage', 'thelostmc', vehicleProps)
+          TriggerServerEvent('esx_society:removeVehicleFromGarage', 'nomadmc', vehicleProps)
 
         end,
         function(data, menu)
@@ -239,7 +239,7 @@ function OpenVehicleSpawnerMenu(station, partNum)
                 ESX.ShowNotification(_U('service_max') .. inServiceCount .. '/' .. maxInService)
               end
 
-            end, 'thelostmc')
+            end, 'nomadmc')
 
           end
 
@@ -270,7 +270,7 @@ function OpenBallasActionsMenu()
   ESX.UI.Menu.Open(
     'default', GetCurrentResourceName(), 'ballas_actions',
     {
-      title    = 'TheLostMC',
+      title    = 'NomadMC',
       align    = 'top-left',
       elements = {
         {label = _U('citizen_interaction'), value = 'citizen_interaction'},
@@ -310,19 +310,19 @@ function OpenBallasActionsMenu()
               end
 
               if data2.current.value == 'handcuff' then
-                TriggerServerEvent('esx_thelostmcjob:handcuff', GetPlayerServerId(player))
+                TriggerServerEvent('esx_nomadmcjob:handcuff', GetPlayerServerId(player))
               end
 
               if data2.current.value == 'drag' then
-                TriggerServerEvent('esx_thelostmcjob:drag', GetPlayerServerId(player))
+                TriggerServerEvent('esx_nomadmcjob:drag', GetPlayerServerId(player))
               end
 
               if data2.current.value == 'put_in_vehicle' then
-                TriggerServerEvent('esx_thelostmcjob:putInVehicle', GetPlayerServerId(player))
+                TriggerServerEvent('esx_nomadmcjob:putInVehicle', GetPlayerServerId(player))
               end
 
               if data2.current.value == 'out_the_vehicle' then
-                  TriggerServerEvent('esx_thelostmcjob:OutVehicle', GetPlayerServerId(player))
+                  TriggerServerEvent('esx_nomadmcjob:OutVehicle', GetPlayerServerId(player))
               end
 
             else
@@ -421,7 +421,7 @@ function OpenIdentityCardMenu(player)
 
   if Config.EnableESXIdentity then
 
-    ESX.TriggerServerCallback('esx_thelostmcjob:getOtherPlayerData', function(data)
+    ESX.TriggerServerCallback('esx_nomadmcjob:getOtherPlayerData', function(data)
 
       local jobLabel    = nil
       local sexLabel    = nil
@@ -507,7 +507,7 @@ function OpenIdentityCardMenu(player)
 
   else
 
-    ESX.TriggerServerCallback('esx_thelostmcjob:getOtherPlayerData', function(data)
+    ESX.TriggerServerCallback('esx_nomadmcjob:getOtherPlayerData', function(data)
 
       local jobLabel = nil
 
@@ -559,7 +559,7 @@ end
 
 function OpenBodySearchMenu(player)
 
-  ESX.TriggerServerCallback('esx_thelostmcjob:getOtherPlayerData', function(data)
+  ESX.TriggerServerCallback('esx_nomadmcjob:getOtherPlayerData', function(data)
 
     local elements = {}
 
@@ -618,7 +618,7 @@ function OpenBodySearchMenu(player)
 
         if data.current.value ~= nil then
 
-          TriggerServerEvent('esx_thelostmcjob:confiscatePlayerItem', GetPlayerServerId(player), itemType, itemName, amount)
+          TriggerServerEvent('esx_nomadmcjob:confiscatePlayerItem', GetPlayerServerId(player), itemType, itemName, amount)
 
           OpenBodySearchMenu(player)
 
@@ -636,7 +636,7 @@ end
 
 function OpenVehicleInfosMenu(vehicleData)
 
-  ESX.TriggerServerCallback('esx_thelostmcjob:getVehicleInfos', function(infos)
+  ESX.TriggerServerCallback('esx_nomadmcjob:getVehicleInfos', function(infos)
 
     local elements = {}
 
@@ -667,7 +667,7 @@ end
 
 function OpenGetWeaponMenu()
 
-  ESX.TriggerServerCallback('esx_thelostmcjob:getArmoryWeapons', function(weapons)
+  ESX.TriggerServerCallback('esx_nomadmcjob:getArmoryWeapons', function(weapons)
 
     local elements = {}
 
@@ -688,7 +688,7 @@ function OpenGetWeaponMenu()
 
         menu.close()
 
-        ESX.TriggerServerCallback('esx_thelostmcjob:removeArmoryWeapon', function()
+        ESX.TriggerServerCallback('esx_nomadmcjob:removeArmoryWeapon', function()
           OpenGetWeaponMenu()
         end, data.current.value)
 
@@ -730,7 +730,7 @@ function OpenPutWeaponMenu()
 
       menu.close()
 
-      ESX.TriggerServerCallback('esx_thelostmcjob:addArmoryWeapon', function()
+      ESX.TriggerServerCallback('esx_nomadmcjob:addArmoryWeapon', function()
         OpenPutWeaponMenu()
       end, data.current.value)
 
@@ -744,7 +744,7 @@ end
 
 function OpenBuyWeaponsMenu(station)
 
-  ESX.TriggerServerCallback('esx_thelostmcjob:getArmoryWeapons', function(weapons)
+  ESX.TriggerServerCallback('esx_nomadmcjob:getArmoryWeapons', function(weapons)
 
     local elements = {}
 
@@ -773,10 +773,10 @@ function OpenBuyWeaponsMenu(station)
       },
       function(data, menu)
 
-        ESX.TriggerServerCallback('esx_thelostmcjob:buy', function(hasEnoughMoney)
+        ESX.TriggerServerCallback('esx_nomadmcjob:buy', function(hasEnoughMoney)
 
           if hasEnoughMoney then
-            ESX.TriggerServerCallback('esx_thelostmcjob:addArmoryWeapon', function()
+            ESX.TriggerServerCallback('esx_nomadmcjob:addArmoryWeapon', function()
               OpenBuyWeaponsMenu(station)
             end, data.current.value)
           else
@@ -797,7 +797,7 @@ end
 
 function OpenGetStocksMenu()
 
-  ESX.TriggerServerCallback('esx_thelostmcjob:getStockItems', function(items)
+  ESX.TriggerServerCallback('esx_nomadmcjob:getStockItems', function(items)
 
     print(json.encode(items))
 
@@ -833,7 +833,7 @@ function OpenGetStocksMenu()
               menu.close()
               OpenGetStocksMenu()
 
-              TriggerServerEvent('esx_thelostmcjob:getStockItem', itemName, count)
+              TriggerServerEvent('esx_nomadmcjob:getStockItem', itemName, count)
             end
 
           end,
@@ -854,7 +854,7 @@ end
 
 function OpenPutStocksMenu()
 
-  ESX.TriggerServerCallback('esx_thelostmcjob:getPlayerInventory', function(inventory)
+  ESX.TriggerServerCallback('esx_nomadmcjob:getPlayerInventory', function(inventory)
 
     local elements = {}
 
@@ -894,7 +894,7 @@ function OpenPutStocksMenu()
               menu.close()
               OpenPutStocksMenu()
 
-              TriggerServerEvent('esx_thelostmcjob:putStockItems', itemName, count)
+              TriggerServerEvent('esx_nomadmcjob:putStockItems', itemName, count)
             end
 
           end,
@@ -923,7 +923,7 @@ AddEventHandler('esx:setJob', function(job)
   PlayerData.job = job
 end)
 
-AddEventHandler('esx_thelostmcjob:hasEnteredMarker', function(station, part, partNum)
+AddEventHandler('esx_nomadmcjob:hasEnteredMarker', function(station, part, partNum)
 
   if part == 'Armory' then
     CurrentAction     = 'menu_armory'
@@ -964,13 +964,13 @@ AddEventHandler('esx_thelostmcjob:hasEnteredMarker', function(station, part, par
 
 end)
 
-AddEventHandler('esx_thelostmcjob:hasExitedMarker', function(station, part, partNum)
+AddEventHandler('esx_nomadmcjob:hasExitedMarker', function(station, part, partNum)
   ESX.UI.Menu.CloseAll()
   CurrentAction = nil
 end)
 
-RegisterNetEvent('esx_thelostmcjob:handcuff')
-AddEventHandler('esx_thelostmcjob:handcuff', function()
+RegisterNetEvent('esx_nomadmcjob:handcuff')
+AddEventHandler('esx_nomadmcjob:handcuff', function()
 
   IsHandcuffed    = not IsHandcuffed;
   local playerPed = GetPlayerPed(-1)
@@ -1002,8 +1002,8 @@ AddEventHandler('esx_thelostmcjob:handcuff', function()
   end)
 end)
 
-RegisterNetEvent('esx_thelostmcjob:drag')
-AddEventHandler('esx_thelostmcjob:drag', function(cop)
+RegisterNetEvent('esx_nomadmcjob:drag')
+AddEventHandler('esx_nomadmcjob:drag', function(cop)
   TriggerServerEvent('esx:clientLog', 'starting dragging')
   IsDragged = not IsDragged
   CopPed = tonumber(cop)
@@ -1024,8 +1024,8 @@ Citizen.CreateThread(function()
   end
 end)
 
-RegisterNetEvent('esx_thelostmcjob:putInVehicle')
-AddEventHandler('esx_thelostmcjob:putInVehicle', function()
+RegisterNetEvent('esx_nomadmcjob:putInVehicle')
+AddEventHandler('esx_nomadmcjob:putInVehicle', function()
 
   local playerPed = GetPlayerPed(-1)
   local coords    = GetEntityCoords(playerPed)
@@ -1056,8 +1056,8 @@ AddEventHandler('esx_thelostmcjob:putInVehicle', function()
 
 end)
 
-RegisterNetEvent('esx_thelostmcjob:OutVehicle')
-AddEventHandler('esx_thelostmcjob:OutVehicle', function(t)
+RegisterNetEvent('esx_nomadmcjob:OutVehicle')
+AddEventHandler('esx_nomadmcjob:OutVehicle', function(t)
   local ped = GetPlayerPed(t)
   ClearPedTasksImmediately(ped)
   plyPos = GetEntityCoords(GetPlayerPed(-1),  true)
@@ -1085,7 +1085,7 @@ Citizen.CreateThread(function()
 
     Wait(0)
 
-    if PlayerData.job ~= nil and PlayerData.job.name == 'thelostmc' then
+    if PlayerData.job ~= nil and PlayerData.job.name == 'nomadmc' then
 
       local playerPed = GetPlayerPed(-1)
       local coords    = GetEntityCoords(playerPed)
@@ -1110,7 +1110,7 @@ Citizen.CreateThread(function()
           end
         end
 
-        if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.name == 'thelostmc' and PlayerData.job.grade_name == 'boss' then
+        if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.name == 'nomadmc' and PlayerData.job.grade_name == 'boss' then
 
           for i=1, #v.BossActions, 1 do
             if not v.BossActions[i].disabled and GetDistanceBetweenCoords(coords,  v.BossActions[i].x,  v.BossActions[i].y,  v.BossActions[i].z,  true) < Config.DrawDistance then
@@ -1134,7 +1134,7 @@ Citizen.CreateThread(function()
 
     Wait(0)
 
-    if PlayerData.job ~= nil and PlayerData.job.name == 'thelostmc' then
+    if PlayerData.job ~= nil and PlayerData.job.name == 'nomadmc' then
 
       local playerPed      = GetPlayerPed(-1)
       local coords         = GetEntityCoords(playerPed)
@@ -1181,7 +1181,7 @@ Citizen.CreateThread(function()
           end
         end
 
-        if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.name == 'thelostmc' and PlayerData.job.grade_name == 'boss' then
+        if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.name == 'nomadmc' and PlayerData.job.grade_name == 'boss' then
 
           for i=1, #v.BossActions, 1 do
             if GetDistanceBetweenCoords(coords,  v.BossActions[i].x,  v.BossActions[i].y,  v.BossActions[i].z,  true) < Config.MarkerSize.x then
@@ -1204,7 +1204,7 @@ Citizen.CreateThread(function()
           (LastStation ~= nil and LastPart ~= nil and LastPartNum ~= nil) and
           (LastStation ~= currentStation or LastPart ~= currentPart or LastPartNum ~= currentPartNum)
         then
-          TriggerEvent('esx_thelostmcjob:hasExitedMarker', LastStation, LastPart, LastPartNum)
+          TriggerEvent('esx_nomadmcjob:hasExitedMarker', LastStation, LastPart, LastPartNum)
           hasExited = true
         end
 
@@ -1213,14 +1213,14 @@ Citizen.CreateThread(function()
         LastPart                = currentPart
         LastPartNum             = currentPartNum
 
-        TriggerEvent('esx_thelostmcjob:hasEnteredMarker', currentStation, currentPart, currentPartNum)
+        TriggerEvent('esx_nomadmcjob:hasEnteredMarker', currentStation, currentPart, currentPartNum)
       end
 
       if not hasExited and not isInMarker and HasAlreadyEnteredMarker then
 
         HasAlreadyEnteredMarker = false
 
-        TriggerEvent('esx_thelostmcjob:hasExitedMarker', LastStation, LastPart, LastPartNum)
+        TriggerEvent('esx_nomadmcjob:hasExitedMarker', LastStation, LastPart, LastPartNum)
       end
 
     end
@@ -1239,7 +1239,7 @@ Citizen.CreateThread(function()
       AddTextComponentString(CurrentActionMsg)
       DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 
-      if IsControlJustPressed(0, 38) and PlayerData.job ~= nil and PlayerData.job.name == 'thelostmc' and (GetGameTimer() - GUI.Time) > 150 then
+      if IsControlJustPressed(0, 38) and PlayerData.job ~= nil and PlayerData.job.name == 'nomadmc' and (GetGameTimer() - GUI.Time) > 150 then
 
         if CurrentAction == 'menu_armory' then
           OpenArmoryMenu(CurrentActionData.station)
@@ -1254,7 +1254,7 @@ Citizen.CreateThread(function()
           if Config.EnableSocietyOwnedVehicles then
 
             local vehicleProps = ESX.Game.GetVehicleProperties(CurrentActionData.vehicle)
-            TriggerServerEvent('esx_society:putVehicleInGarage', 'thelostmc', vehicleProps)
+            TriggerServerEvent('esx_society:putVehicleInGarage', 'nomadmc', vehicleProps)
 
           else
 
@@ -1267,7 +1267,7 @@ Citizen.CreateThread(function()
               GetEntityModel(vehicle) == GetHashKey('burrito3') or
               GetEntityModel(vehicle) == GetHashKey('mesa')
             then
-              TriggerServerEvent('esx_service:disableService', 'thelostmc')
+              TriggerServerEvent('esx_service:disableService', 'nomadmc')
             end
 
           end
@@ -1277,7 +1277,7 @@ Citizen.CreateThread(function()
 
         if CurrentAction == 'menu_boss_actions' then
           ESX.UI.Menu.CloseAll()
-		  TriggerEvent('esx_society:openBossMenu', 'thelostmc', function(data, menu)
+		  TriggerEvent('esx_society:openBossMenu', 'nomadmc', function(data, menu)
 			menu.close()
 
 			CurrentAction     = 'menu_boss_actions'
@@ -1293,7 +1293,7 @@ Citizen.CreateThread(function()
 
     end
 
-   if IsControlJustPressed(0, 167) and PlayerData.job ~= nil and PlayerData.job.name == 'thelostmc' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'ballas_actions') and (GetGameTimer() - GUI.Time) > 150 then
+   if IsControlJustPressed(0, 167) and PlayerData.job ~= nil and PlayerData.job.name == 'nomadmc' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'ballas_actions') and (GetGameTimer() - GUI.Time) > 150 then
      OpenBallasActionsMenu()
      GUI.Time = GetGameTimer()
     end
