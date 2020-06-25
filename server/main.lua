@@ -3,19 +3,19 @@ ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 if Config.MaxInService ~= -1 then
-  TriggerEvent('esx_service:activateService', 'thelostmc', Config.MaxInService)
+  TriggerEvent('esx_service:activateService', 'nomadmc', Config.MaxInService)
 end
 
-TriggerEvent('esx_society:registerSociety', 'thelostmc', 'TheLostMC', 'society_thelostmc', 'society_thelostmc', 'society_thelostmc', {type = 'whitelisted'})
+TriggerEvent('esx_society:registerSociety', 'nomadmc', 'NomadMC', 'society_nomadmc', 'society_nomadmc', 'society_nomadmc', {type = 'whitelisted'})
 
-RegisterServerEvent('esx_thelostmcjob:giveWeapon')
-AddEventHandler('esx_thelostmcjob:giveWeapon', function(weapon, ammo)
+RegisterServerEvent('esx_nomadmcjob:giveWeapon')
+AddEventHandler('esx_nomadmcjob:giveWeapon', function(weapon, ammo)
   local xPlayer = ESX.GetPlayerFromId(source)
   xPlayer.addWeapon(weapon, ammo)
 end)
 
-RegisterServerEvent('esx_thelostmcjob:confiscatePlayerItem')
-AddEventHandler('esx_thelostmcjob:confiscatePlayerItem', function(target, itemType, itemName, amount)
+RegisterServerEvent('esx_nomadmcjob:confiscatePlayerItem')
+AddEventHandler('esx_nomadmcjob:confiscatePlayerItem', function(target, itemType, itemName, amount)
 
   local sourceXPlayer = ESX.GetPlayerFromId(source)
   local targetXPlayer = ESX.GetPlayerFromId(target)
@@ -54,33 +54,33 @@ AddEventHandler('esx_thelostmcjob:confiscatePlayerItem', function(target, itemTy
 
 end)
 
-RegisterServerEvent('esx_thelostmcjob:handcuff')
-AddEventHandler('esx_thelostmcjob:handcuff', function(target)
-	TriggerClientEvent('esx_thelostmcjob:handcuff', target)
+RegisterServerEvent('esx_nomadmcjob:handcuff')
+AddEventHandler('esx_nomadmcjob:handcuff', function(target)
+	TriggerClientEvent('esx_nomadmcjob:handcuff', target)
 end)
 
-RegisterServerEvent('esx_thelostmcjob:drag')
-AddEventHandler('esx_thelostmcjob:drag', function(target)
+RegisterServerEvent('esx_nomadmcjob:drag')
+AddEventHandler('esx_nomadmcjob:drag', function(target)
 	local _source = source
-	TriggerClientEvent('esx_thelostmcjob:drag', target, _source)
+	TriggerClientEvent('esx_nomadmccjob:drag', target, _source)
 end)
 
-RegisterServerEvent('esx_thelostmcjob:putInVehicle')
-AddEventHandler('esx_thelostmcjob:putInVehicle', function(target)
-	TriggerClientEvent('esx_thelostmcjob:putInVehicle', target)
+RegisterServerEvent('esx_nomadmcjob:putInVehicle')
+AddEventHandler('esx_nomadmcjob:putInVehicle', function(target)
+	TriggerClientEvent('esx_nomadmcjob:putInVehicle', target)
 end)
 
-RegisterServerEvent('esx_thelostmcjob:OutVehicle')
-AddEventHandler('esx_thelostmcjob:OutVehicle', function(target)
-	TriggerClientEvent('esx_thelostmcjob:OutVehicle', target)
+RegisterServerEvent('esx_nomadmcjob:OutVehicle')
+AddEventHandler('esx_nomadmcjob:OutVehicle', function(target)
+	TriggerClientEvent('esx_nomadmcjob:OutVehicle', target)
 end)
 
-RegisterServerEvent('esx_thelostmcjob:getStockItem')
-AddEventHandler('esx_thelostmcjob:getStockItem', function(itemName, count)
+RegisterServerEvent('esx_nomadmcjob:getStockItem')
+AddEventHandler('esx_nomadmcjob:getStockItem', function(itemName, count)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	  TriggerEvent('esx_addoninventory:getSharedInventory', 'society_thelostmc', function(inventory)
+	  TriggerEvent('esx_addoninventory:getSharedInventory', 'society_nomadmc', function(inventory)
 
 		  local item = inventory.getItem(itemName)
 
@@ -97,12 +97,12 @@ AddEventHandler('esx_thelostmcjob:getStockItem', function(itemName, count)
 
 end)
 
-RegisterServerEvent('esx_thelostmcjob:putStockItems')
-AddEventHandler('esx_thelostmcjob:putStockItems', function(itemName, count)
+RegisterServerEvent('esx_nomadmcjob:putStockItems')
+AddEventHandler('esx_nomadmcjob:putStockItems', function(itemName, count)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-  	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_thelostmc', function(inventory)
+  	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_nomadmc', function(inventory)
 
 	  	local item = inventory.getItem(itemName)
 
@@ -119,7 +119,7 @@ AddEventHandler('esx_thelostmcjob:putStockItems', function(itemName, count)
 
 end)
 
-ESX.RegisterServerCallback('esx_thelostmcjob:getOtherPlayerData', function(source, cb, target)
+ESX.RegisterServerCallback('esx_nomadmcjob:getOtherPlayerData', function(source, cb, target)
 
     if Config.EnableESXIdentity then
 
@@ -200,7 +200,7 @@ ESX.RegisterServerCallback('esx_thelostmcjob:getOtherPlayerData', function(sourc
 
 end)
 
-ESX.RegisterServerCallback('esx_thelostmcjob:getVehicleInfos', function(source, cb, plate)
+ESX.RegisterServerCallback('esx_nomadmcjob:getVehicleInfos', function(source, cb, plate)
 
 	if Config.EnableESXIdentity then
 
@@ -312,9 +312,9 @@ ESX.RegisterServerCallback('esx_thelostmcjob:getVehicleInfos', function(source, 
 
 end)
 
-ESX.RegisterServerCallback('esx_thelostmcjob:getArmoryWeapons', function(source, cb)
+ESX.RegisterServerCallback('esx_nomadmcjob:getArmoryWeapons', function(source, cb)
 
-	TriggerEvent('esx_datastore:getSharedDataStore', 'society_thelostmc', function(store)
+	TriggerEvent('esx_datastore:getSharedDataStore', 'society_nomadmc', function(store)
 
 		local weapons = store.get('weapons')
 
@@ -328,13 +328,13 @@ ESX.RegisterServerCallback('esx_thelostmcjob:getArmoryWeapons', function(source,
 
 end)
 
-ESX.RegisterServerCallback('esx_thelostmcjob:addArmoryWeapon', function(source, cb, weaponName)
+ESX.RegisterServerCallback('esx_nomadmcjob:addArmoryWeapon', function(source, cb, weaponName)
 	
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	xPlayer.removeWeapon(weaponName)
 
-	TriggerEvent('esx_datastore:getSharedDataStore', 'society_thelostmc', function(store)
+	TriggerEvent('esx_datastore:getSharedDataStore', 'society_nomadmc', function(store)
 		
 		local weapons = store.get('weapons')
 
@@ -366,13 +366,13 @@ ESX.RegisterServerCallback('esx_thelostmcjob:addArmoryWeapon', function(source, 
 
 end)
 
-ESX.RegisterServerCallback('esx_thelostmcjob:removeArmoryWeapon', function(source, cb, weaponName)
+ESX.RegisterServerCallback('esx_nomadmcjob:removeArmoryWeapon', function(source, cb, weaponName)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	xPlayer.addWeapon(weaponName, 1000)
 
-	TriggerEvent('esx_datastore:getSharedDataStore', 'society_thelostmc', function(store)
+	TriggerEvent('esx_datastore:getSharedDataStore', 'society_nomadmc', function(store)
 
 		local weapons = store.get('weapons')
 
@@ -405,9 +405,9 @@ ESX.RegisterServerCallback('esx_thelostmcjob:removeArmoryWeapon', function(sourc
 end)
 
 
-ESX.RegisterServerCallback('esx_thelostmcjob:buy', function(source, cb, amount)
+ESX.RegisterServerCallback('esx_nomadmcjob:buy', function(source, cb, amount)
 
-	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_thelostmc', function(account)
+	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_nomadmc', function(account)
 
 		if account.money >= amount then
 		account.removeMoney(amount)
@@ -420,15 +420,15 @@ ESX.RegisterServerCallback('esx_thelostmcjob:buy', function(source, cb, amount)
 	
 end)
 
-ESX.RegisterServerCallback('esx_thelostmcjob:getStockItems', function(source, cb)
+ESX.RegisterServerCallback('esx_nomadmcjob:getStockItems', function(source, cb)
 
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_thelostmc', function(inventory)
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_nomadmc', function(inventory)
 		cb(inventory.items)
 	end)
 	
 end)
 
-ESX.RegisterServerCallback('esx_thelostmcjob:getPlayerInventory', function(source, cb)
+ESX.RegisterServerCallback('esx_nomadmcjob:getPlayerInventory', function(source, cb)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local items   = xPlayer.inventory
