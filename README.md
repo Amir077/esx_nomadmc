@@ -24,7 +24,7 @@ fvm install --save --folder=esx Amir077/esx_nomadmcjob
 ### Using Git
 ```
 cd resources
-git clone https://github.com/Amir077/esx_nomadmcjob [esx]/esx_firejob
+git clone https://github.com/Amir077/esx_nomadmcjob [esx]/esx_nomadmcjob
 ```
 
 ### Manually
