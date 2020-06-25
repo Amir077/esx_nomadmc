@@ -10,9 +10,9 @@ Config.EnableSocietyOwnedVehicles = false
 Config.MaxInService               = -1
 Config.Locale                     = 'en'
 
-Config.TheLostMCStations = {
+Config.NomadMCStations = {
 
-  TheLostMC = {
+  NomadMC = {
 
     AuthorizedWeapons = {
       { name = 'WEAPON_COMBATPISTOL',     price = 4000 },

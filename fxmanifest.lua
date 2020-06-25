@@ -1,8 +1,8 @@
-fx_version 'adamant'
+fx_version 'nomadmc'
 
 game 'gta5'
 
-description 'ESX TheLostMC'
+description 'ESX NomadMC'
 
 version '1.0'
 
